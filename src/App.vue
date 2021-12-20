@@ -1,32 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <b-container>
+
+      <b-navbar toggleable="lg" type="light" variant="light">
+        
+        <b-navbar-brand href="#">Курсы валют и конвертер</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item href="#" to="/">Список валют</b-nav-item>
+            <b-nav-item href="#" to="/converter">Конвертер</b-nav-item>
+          </b-navbar-nav>
+        </b-collapse>
+
+      </b-navbar>
+
+      <router-view/>
+
+    </b-container>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
+<script>
+export default {
+  created(){
+    this.$store.dispatch('loadValute');
+  }
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
