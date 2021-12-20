@@ -5,19 +5,19 @@
     
     <b-row>
       <b-col>
-        <b-form-select v-model="fromValute" :options="options" @change="calc"></b-form-select>
+        <b-select v-model="fromValute" :options="options" @change="calc"></b-select>
       </b-col>
       <b-col>
-        <b-form-input v-model="fromValue" placeholder="Введите сумму" @input="calc"></b-form-input>
+        <b-input v-model="fromValue" placeholder="Введите сумму" @input="calc"></b-input>
       </b-col>
       <b-col class="text-center">
         <b-button @click="reverse">↔</b-button>
       </b-col>
       <b-col>
-        <b-form-select v-model="toValute" :options="options" @change="calc"></b-form-select>
+        <b-select v-model="toValute" :options="options" @change="calc"></b-select>
       </b-col>
       <b-col>
-        <b-form-input v-model="toValue" disabled @input="calc"></b-form-input>
+        <b-input v-model="toValue" disabled @input="calc"></b-input>
       </b-col>
     </b-row>
 
@@ -30,9 +30,9 @@ export default {
   name: 'Converter',
   data(){
     return {
-      fromValute: '',
+      fromValute: '1',
       fromValue: '',
-      toValute: '',
+      toValute: '1',
       toValue: '',
     }
   },
@@ -52,11 +52,11 @@ export default {
   },
   computed: {
     options(){
-      let opt = [];
+      let opt = [{value: 1, text: 'RUB'}];
       this.$store.getters.getValute.map((item)=>{
         opt.push({ value: item.Value, text: item.CharCode})
       })
-      return opt
+      return opt.sort((a, b) => a.text > b.text ? 1 : -1);
     }
   }
 }
